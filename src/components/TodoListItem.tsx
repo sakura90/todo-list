@@ -1,26 +1,24 @@
-import React, {Component} from 'react';
-
-interface Todo {
-  text: string;
-  complete: boolean;
-}
+import React from 'react';
+import './../types/types.d.ts';
 
 interface Props {
   todo: Todo;
+  toggleTodo: ToggleTodo;
 }
 
-class TodoListItem extends Component<Props> {
-  render() {
+function TodoListItem(p : Props) {
     return (
       <li>
         <label
-          style={{ textDecoration: this.props.todo.complete ? 'line-through' : undefined }}
+          style={{ textDecoration: p.todo.complete ? 'line-through' : undefined }}
         >
-          <input type="checkbox" checked={this.props.todo.complete} /> {this.props.todo.text}
+          <input type="checkbox" checked={p.todo.complete} onClick={() => {
+            p.toggleTodo(p.todo);
+          }}
+          /> {p.todo.text}
         </label>
       </li>
     );      
-  }
 }
 
 export default TodoListItem;
